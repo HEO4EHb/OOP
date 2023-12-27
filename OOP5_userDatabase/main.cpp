@@ -14,7 +14,7 @@ int main() {
     userRepository.add(User(2, "Daniil", "Tevs", "qwerty"));
 
     // Удаление пользователя из репозитория по идентификатору
-    userRepository.remove(User(3, "Yan", "Kazantsev", "coolpass"));
+    userRepository.remove(User(3, "Yan", "Matveyev", "coolpass"));
 
     // Обновление данных пользователя в репозитории
     userRepository.update(User(1, "Neegrow", "Gangsta", "superpass"));
