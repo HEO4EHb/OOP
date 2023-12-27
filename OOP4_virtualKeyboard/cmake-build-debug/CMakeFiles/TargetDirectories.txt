@@ -1,0 +1,2 @@
+D:/VS/OOP/OOP4_virtualKeyboard/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/VS/OOP/OOP4_virtualKeyboard/cmake-build-debug/CMakeFiles/rebuild_cache.dir
