@@ -3,18 +3,20 @@
 #include <cmath>
 #include <stdexcept>
 
-class IntegralCalculation {
+// Базовый класс для вычисления интегралов
+class IntegralCalc {
 public:
-    IntegralCalculation(int numPoints, double step) {
+    IntegralCalc(int numPoints, double step) {
+        // Проверка корректности входных данных
         if (numPoints < 2 || step <= 0.0)
-            throw std::invalid_argument("Incorrect input"); // Очистка памяти как в сегодняшней лекции не требуется, так как не используется оператор new
+            throw std::invalid_argument("Incorrect input");
         else {
-            this->numPoints = numPoints;
+            this->numPoints = numPoints;//обращаемся внутри класса и делаем присвоение через this
             this->step = step;
         }
     }
 
-    // Метод виртуальный, тк хотим его изменить в наследуемых классах
+    // Виртуальная функция для вычисления интеграла, должна быть переопределена в производных классах
     virtual double Calc(const std::function<double(double)>& integralFunc, double lowerBound, double upperBound) const = 0;
 
 protected:
@@ -22,16 +24,17 @@ protected:
     double step;
 };
 
-class Trapezoidal : public IntegralCalculation {
+// Класс для вычисления интеграла методом трапеций
+class TrapezoidalIntegrator : public IntegralCalc {
 public:
-    Trapezoidal(int numPoints, double step) : IntegralCalculation(numPoints, step) {}
+    TrapezoidalIntegrator(int numPoints, double step) : IntegralCalc(numPoints, step) {}
 
-    // Переопределяем Calc
+    // Переопределение метода для вычисления интеграла
     double Calc(const std::function<double(double)>& integralFunc, double lowerBound, double upperBound) const override {
         double result = 0.0;
         double x = lowerBound;
 
-        // Сумма функций * шага / 2
+        // Сумма значений функции * шага / 2
         for (int i = 0; i < numPoints; ++i) {
             double fx = integralFunc(x);
             x += step;
@@ -44,20 +47,21 @@ public:
     }
 };
 
-class Simpson : public IntegralCalculation {
+// Класс для вычисления интеграла методом Симпсона
+class SimpsonIntegrator : public IntegralCalc {
 public:
-    //Используется интерполяция квадратичными полиномами, которая требует кратность двум
-    Simpson(int numPoints, double step) : IntegralCalculation(numPoints, step) {
+    SimpsonIntegrator(int numPoints, double step) : IntegralCalc(numPoints, step) {
+        // Проверка, что количество точек кратно двум (требование метода Симпсона)
         if (numPoints % 2 != 0)
             throw std::invalid_argument("Incorrect input: the number of points must be a multiple of two");
     }
 
-    // Переопределяем Calc
+    // Переопределение метода для вычисления интеграла
     double Calc(const std::function<double(double)>& integralFunc, double lowerBound, double upperBound) const override {
         double result = integralFunc(lowerBound) + integralFunc(upperBound);
         double x = lowerBound + step;
 
-        // Сумма f(x) + 2 * f(x + step) + 4 * f*(x + 2 * step) * step / 3
+        // Сумма f(x) + 2 * f(x + step) + 4 * f(x + 2 * step) * шаг / 3
         for (int i = 1; i < numPoints; ++i) {
             double fx = integralFunc(x);
             x += step;
@@ -76,22 +80,25 @@ public:
 
 int main() {
     try {
+        // Параметры для вычисления интеграла
         int numPoints = 1000;
         double step = 0.001;
         double lowerBound = 0.0;
         double upperBound = 1.0;
 
-        Trapezoidal trapezoidal(numPoints, step);
+        // Интегрирование функции x^2 методом трапеций
+        TrapezoidalIntegrator trapezoidal(numPoints, step);
         auto integralFunc = [](double x) { return x * x; };
         double integralResult = trapezoidal.Calc(integralFunc, lowerBound, upperBound);
         std::cout << "Trapezoidal: " << integralResult << std::endl;
 
-        Simpson simpson(numPoints, step);
+        // Интегрирование функции x^2 методом Симпсона
+        SimpsonIntegrator simpson(numPoints, step);
         integralResult = simpson.Calc(integralFunc, lowerBound, upperBound);
         std::cout << "Simpson: " << integralResult << std::endl;
     }
     catch (const std::exception& e) {
-        std::cerr << "Ошибка: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 
     return 0;

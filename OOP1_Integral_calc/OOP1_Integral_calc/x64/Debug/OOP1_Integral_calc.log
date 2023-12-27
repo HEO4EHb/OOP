@@ -1,8 +1,2 @@
 ﻿  OOP1_Integral_calc.cpp
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u041E", невозможно представить в текущей кодовой странице (1252)
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u0448", невозможно представить в текущей кодовой странице (1252)
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u0438", невозможно представить в текущей кодовой странице (1252)
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u0431", невозможно представить в текущей кодовой странице (1252)
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u043A", невозможно представить в текущей кодовой странице (1252)
-D:\OS10\OOP1_Integral_calc\OOP1_Integral_calc\OOP1_Integral_calc.cpp(94,22): warning C4566: символ, представленный универсальным именем символа "\u0430", невозможно представить в текущей кодовой странице (1252)
-  OOP1_Integral_calc.vcxproj -> D:\OS10\OOP1_Integral_calc\x64\Debug\OOP1_Integral_calc.exe
+  OOP1_Integral_calc.vcxproj -> D:\VS\OOP\OOP1_Integral_calc\x64\Debug\OOP1_Integral_calc.exe
